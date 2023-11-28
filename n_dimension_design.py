@@ -72,8 +72,7 @@ def minimize_fuel_cost(d: []):
         weights.append(2 * c_a * totals)
         weights.append(2 * c_e * totals)
     c = np.array(weights)
-    A = np.array([[1, 0, 1, 0],
-                  [0, 1, 0, 1]])
+    A = np.ones((2, len(c)))
     b_u = np.array([48, 8])
     b_l = np.array([48, 8])
 
