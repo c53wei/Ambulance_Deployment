@@ -2,7 +2,7 @@ import pytest
 
 import numpy as np
 
-from objective_funcs import optimize_all
+from objective_func import optimize_all
 
 
 @pytest.fixture()
@@ -53,15 +53,13 @@ def initial_guess():
 
 def test_basic(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
                bounds, initial_guess, benchmark):
-
     benchmark(optimize_all, d_gr_severe=d_gr_severe, d_gr_moderate=d_gr_moderate, d_gr_mild=d_gr_mild,
               d_sm_severe=d_sm_severe, d_sm_moderate=d_sm_moderate, d_sm_mild=d_sm_mild,
               bounds=bounds, initial_guess=initial_guess)
 
+
 def test_input_10(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
-               bounds, initial_guess, benchmark):
-
-
+                  bounds, initial_guess, benchmark):
     d_gr_severe = np.array(d_gr_severe.tolist() * 10)
     d_gr_moderate = np.array(d_gr_moderate.tolist() * 10)
     d_gr_mild = np.array(d_gr_mild.tolist() * 10)
@@ -70,7 +68,6 @@ def test_input_10(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moder
     d_sm_moderate = np.array(d_sm_moderate.tolist() * 10)
     d_sm_mild = np.array(d_sm_mild.tolist() * 10)
 
-
     benchmark(optimize_all, d_gr_severe=d_gr_severe, d_gr_moderate=d_gr_moderate, d_gr_mild=d_gr_mild,
               d_sm_severe=d_sm_severe, d_sm_moderate=d_sm_moderate, d_sm_mild=d_sm_mild,
               bounds=bounds, initial_guess=initial_guess)
@@ -78,7 +75,6 @@ def test_input_10(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moder
 
 def test_input_10(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
                   bounds, initial_guess, benchmark):
-
     multiplier = 10
 
     d_gr_severe = np.array(d_gr_severe.tolist() * multiplier)
@@ -93,9 +89,9 @@ def test_input_10(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moder
               d_sm_severe=d_sm_severe, d_sm_moderate=d_sm_moderate, d_sm_mild=d_sm_mild,
               bounds=bounds, initial_guess=initial_guess)
 
-def test_input_100(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
-                  bounds, initial_guess, benchmark):
 
+def test_input_100(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
+                   bounds, initial_guess, benchmark):
     multiplier = 100
 
     d_gr_severe = np.array(d_gr_severe.tolist() * multiplier)
@@ -112,8 +108,7 @@ def test_input_100(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_mode
 
 
 def test_input_500(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
-                  bounds, initial_guess, benchmark):
-
+                   bounds, initial_guess, benchmark):
     multiplier = 500
 
     d_gr_severe = np.array(d_gr_severe.tolist() * multiplier)
@@ -128,9 +123,9 @@ def test_input_500(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_mode
               d_sm_severe=d_sm_severe, d_sm_moderate=d_sm_moderate, d_sm_mild=d_sm_mild,
               bounds=bounds, initial_guess=initial_guess)
 
-def test_input_1000(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
-                  bounds, initial_guess, benchmark):
 
+def test_input_1000(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
+                    bounds, initial_guess, benchmark):
     multiplier = 1000
 
     d_gr_severe = np.array(d_gr_severe.tolist() * multiplier)
@@ -145,9 +140,9 @@ def test_input_1000(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_mod
               d_sm_severe=d_sm_severe, d_sm_moderate=d_sm_moderate, d_sm_mild=d_sm_mild,
               bounds=bounds, initial_guess=initial_guess)
 
-def test_input_5000(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
-                  bounds, initial_guess, benchmark):
 
+def test_input_5000(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
+                    bounds, initial_guess, benchmark):
     multiplier = 5000
 
     d_gr_severe = np.array(d_gr_severe.tolist() * multiplier)
@@ -164,8 +159,7 @@ def test_input_5000(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_mod
 
 
 def test_input_10000(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_moderate, d_sm_mild,
-                  bounds, initial_guess, benchmark):
-
+                     bounds, initial_guess, benchmark):
     multiplier = 10000
 
     d_gr_severe = np.array(d_gr_severe.tolist() * multiplier)
@@ -179,5 +173,3 @@ def test_input_10000(d_gr_severe, d_gr_moderate, d_gr_mild, d_sm_severe, d_sm_mo
     benchmark(optimize_all, d_gr_severe=d_gr_severe, d_gr_moderate=d_gr_moderate, d_gr_mild=d_gr_mild,
               d_sm_severe=d_sm_severe, d_sm_moderate=d_sm_moderate, d_sm_mild=d_sm_mild,
               bounds=bounds, initial_guess=initial_guess)
-
-

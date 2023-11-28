@@ -13,23 +13,6 @@ c_a = .00225
 c_e = 0.0011175
 
 
-def fuel_cost(x, d_gr, d_sm):
-    # Dollars to drive per grid distance for the ambulance
-
-    c = 0
-    for i in range(len(d_gr)):
-        # Ambulances at Grand River
-        a = x[0] * (d_gr[i] * c_a)
-        # Ambulances at St. Mary's
-        b = x[1] * (d_sm[i] * c_a)
-        # ERVs at Grand River
-        c = x[2] * (d_gr[i] * c_e)
-        # ERVs at St. Mary's
-        d = x[3] * (d_sm[i] * c_e)
-        c += 2 * (a + b + c + d)  # Or should it be + + here
-    return c
-
-
 def survival_exp(x, d_gr, d_sm, coefficient, denominator):
     # Ambulance speed in grid lengths per hour
     v_a = 160
@@ -75,10 +58,6 @@ def constraint(x):
     return [-x[0] - x[1] + 48,
             -x[2] - x[3] + 8]
 
-
-def cost_constraint(x):
-    return [x[0] + x[1] - 48,
-            x[2] + x[3] - 8]
 
 
 def maximize_survival_exp(d_gr, d_sm, x0, coefficient, denominator, bounds):
