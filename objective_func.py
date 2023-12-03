@@ -15,9 +15,9 @@ c_e = 0.0011175
 
 def survival_exp(x, d_gr, d_sm, coefficient, denominator):
     # Ambulance speed in grid lengths per hour
-    v_a = 160
+    v_a = 120
     # ERV speed in grid lengths per hour
-    v_e = 100
+    v_e = 160
 
     t = 0
     for i in range(len(d_gr)):
@@ -36,26 +36,31 @@ def survival_exp(x, d_gr, d_sm, coefficient, denominator):
 
 def survival_step(x, d_gr, d_sm):
     # Ambulance speed in grid lengths per hour
-    v_a = 160
+    v_a = 120
     # ERV speed in grid lengths per hour
-    v_e = 100
+    v_e = 160
 
     t = 0
     for i in range(len(d_gr)):
         # Ambulances at Grand River
-        a = (1 / x[0]) * (d_gr[i] / v_a)
+        # a = (1 / x[0]) * (d_gr[i] / v_a)
         # Ambulances at St. Mary's
-        b = (1 / x[1]) * (d_sm[i] / v_a)
+        # b = (1 / x[1]) * (d_sm[i] / v_a)
         # ERVs at Grand River
         c = (1 / x[2]) * (d_gr[i] / v_e)
         # ERVs at St. Mary's
         d = (1 / x[3]) * (d_sm[i] / v_e)
-        t += 2 * (a + b + c + d)
+        t += 2 * (c + d)
     return -1 if t < 8 else 0
 
 
 def constraint(x):
     return [-x[0] - x[1] + 48,
+            -x[2] - x[3] + 8]
+
+def mild_constraint(x):
+    return [x[0] - 0,
+            x[1] - 0,
             -x[2] - x[3] + 8]
 
 
@@ -71,7 +76,7 @@ def maximize_survival_exp(d_gr, d_sm, x0, coefficient, denominator, bounds):
 def maximize_survival_step(d_gr, d_sm, x0, bounds):
     """Suitable for constrained optimization problems.
        Efficient for problems with smooth and differentiable objective functions."""
-    constraints = ({'type': 'eq', 'fun': constraint})
+    constraints = ({'type': 'eq', 'fun': mild_constraint})
     return minimize(survival_step, x0, args=(d_gr, d_sm),
                     bounds=bounds, constraints=constraints, method='SLSQP')
 
